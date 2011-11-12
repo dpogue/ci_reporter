@@ -185,15 +185,19 @@ module CI
 
       private
       def description_for(name_or_example)
-        if name_or_example.respond_to?(:full_description)
-          name_or_example.full_description
-        elsif name_or_example.respond_to?(:metadata)
-          name_or_example.metadata[:example_group][:full_description]
-        elsif name_or_example.respond_to?(:description)
-          name_or_example.description
-        else
-          "UNKNOWN"
-        end
+        verstr = "With#{defined?(JRUBY_VERSION) ? " JRuby #{JRUBY_VERSION} " : ' '}Ruby #{RUBY_VERSION}"
+        namestr = 
+          if name_or_example.respond_to?(:full_description)
+            name_or_example.full_description
+          elsif name_or_example.respond_to?(:metadata)
+            name_or_example.metadata[:example_group][:full_description]
+          elsif name_or_example.respond_to?(:description)
+            name_or_example.description
+          else
+            "UNKNOWN"
+          end
+
+        return "#{verstr}. #{namestr}"
       end
 
       def write_report
