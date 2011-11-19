@@ -197,7 +197,7 @@ module CI
             "UNKNOWN"
           end
 
-        return "#{verstr} #{namestr}"
+        return "#{verstr}.#{namestr}"
       end
 
       def write_report
